@@ -1,116 +1,68 @@
-let kmh = 36, ms = 20;
+//Задача №1 Функция конвертации скоростей
 
-console.log(`> ${kmh} км/ч соответствует ${kmh/3.6} м/с`);
-console.log(`> ${ms} м/с соответствует ${ms*3.6} км/ч`);
-
-
-let a = 3, b = 4, c = 5;
-const p = a + b + c;
-const s = Math.sqrt(p * (p - a) * (p - b) * (p - c));
-
-if (a + b > c && a + c > b && b + c > a) {
-    console.log(`> треугольник существует`);
-    console.log(`> периметр = ${p}`);
-    console.log(`> площадь = ${s}`);
-    console.log(`> отношение = ${s/p}`);
-} else {
-    console.log(`> треугольника не существует`);
-}
-
-
-/* let number = prompt('Введите число', [0]);
-
-while (isNaN(number)) {
-    number = prompt('Введите число', [0]);
-}
-for (let i = 0; i <= number; i++) {
-    if (i % 2 != 0 && i % 5 != 0) {
-        console.log(`> "${i} fizz"`);
-    } else if (i % 2 != 0 && i % 5 == 0){
-        console.log(`> "${i} fizz buzz"`);
+function convertSpeed(speed, conv) {
+    if (conv == "toMS") {
+        return speed/3.6;
     }
-    if (i % 2 == 0 && i % 5 != 0) {
-        console.log(`> "${i} buzz"`);
-    } else if (i % 2 == 0 && i % 5 == 0){
-        console.log(`> "${i} fizz buzz"`); 
-    }
-} */
-
-
-let tree = '', symbol = 0;
-const lvlTree = 12;
-
-for (let i = 1; i < lvlTree + 1; i++) {
-    if (i % 2 != 0) {
-        while (symbol < i) {
-            tree += '*';
-            symbol++;
-        }
-        tree += '\n';
-        symbol = 0;
-    } else {
-        while (symbol < i) {
-            tree += '#';
-            symbol++;
-        }
-        tree += '\n';
-        symbol = 0;
+    else if (conv == "toKMH") {
+        return speed*3.6;
     }
 }
-tree += '||';
-console.log(`> \n${tree}`);
 
+console.log(`convertSpeed(36, 'toMS') -> ${convertSpeed(36, 'toMS')} м/с`);
+console.log(`convertSpeed(20, 'toKMH') -> ${convertSpeed(20, 'toKMH')} км/ч`);
 
-/* let userNum = 0;
-const num = 36;
+//Задача №2 Абсолютное значение
 
-while (userNum != num) {
-    userNum = prompt('Введите число', [0]);
-    while (isNaN(userNum)) {
-        userNum = prompt('Введите число', [0]);
+function abs(number) {
+    let result = number;
+    if (number < 0) {
+        result = number * -1;
     }
-    if (userNum > num) {
-        console.log(`> "ваше число больше"`);
-    } else if (userNum < num) {
-        console.log(`> "ваше число меньше"`);
-    } else {
-        break;
+    return result;
+}
+
+console.log(`absValue(-2) -> ${abs(-2)}`);
+console.log(`absValue(100) -> ${abs(100)}`);
+console.log(`absValue(0) -> ${abs(0)}`);
+
+//Задача №3 Работа с объектом 
+
+function Student(group,last_name,first_name) {
+    this.group = group;
+    this.last_name = last_name;
+    this.first_name = first_name;
+}
+
+let student = new Student("211-325","Kurkov","Ruslan");
+
+console.log(`Список свойств: ${Object.keys(student)}`)
+console.log(`Студент ${student.first_name} ${student.last_name} учится в ${student.group} группе`);
+
+//Задача №4 Случайные числа
+
+function randomNumber (min, max) {
+    let random = min + Math.random() * (max - min + 1);
+    return Math.floor(random);
+}
+
+console.log(`randomNumber(0, 10) -> ${randomNumber(0, 10)}`);
+console.log(`randomNumber(-10, 10) -> ${randomNumber(-10, 10)}`);
+
+//Задача №5 Значения из массива
+
+let arr1 = [1,2,3,4];
+let num1 = 2;
+let arr2 = [1,2,3,4];
+let num2 = 3;
+
+function newArr(arr, num) {
+    let resArr = []
+    for (let i = 0; i < num; i++) {
+        resArr.push(arr[randomNumber(0, arr.length - 1)]);
     }
-
+    return resArr;
 }
-console.log(`> "угадано"`); */
 
-/* let n = prompt('Введите число n', [0]);
-let x = prompt('Введите число x', [0]);
-let y = prompt('Введите число y', [0]);
-let result = '';
-
-while (isNaN(n) || isNaN(x) || isNaN(y)) {
-    n = nprompt('Введите число n', [0]);
-    x = prompt('Введите число x', [0]);
-    y = prompt('Введите число y', [0]);
-}
-if (n % x == 0 && n % y == 0) {
-    result = 'true'
-} else {
-    result = 'false'
-}
-console.log(`> n = ${n}, x = ${x}, y = ${y} => ${result}`); */
-
-let month = prompt('Задайте месяц как число', [0]);
-let quarter = 0;
-
-while (isNaN(month)) {
-    month = prompt('Задайте месяц как число', [0]);
-}
-if (month > 0 && month < 4) {
-    qarter = 1;
-} else if (month > 3 && month < 7) {
-    quarter = 2;
-} else if (month > 6 && month < 10) {
-    quarter = 3;
-} else {
-    quarter = 4;
-}
-console.log(`> месяц ${month} => ${quarter} квартал`);
-console.log(`> месяц ${month} => ${Math.floor(month / 4) + 1} квартал`);
+console.log(`[${arr1}], ${num1}) -> [${newArr(arr1, num1)}]`);
+console.log(`[${arr2}], ${num2}) -> [${newArr(arr2, num2)}]`);
